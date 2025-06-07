@@ -314,14 +314,14 @@
     </form>
 
     <script>
-      if (navigator.credentials && navigator.credentials.get) {
-        navigator.credentials.get({ password: true }).then((cred) => {
-          if (cred && cred.id) {
-            console.log(cred);
-            document.querySelector('input[name="email"]').value = cred.id;
-          }
-        });
-      }
+      window.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get("email");
+
+        if (email) {
+          document.getElementById("email").value = decodeURIComponent(email);
+        }
+      });
 
       document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("cow");
