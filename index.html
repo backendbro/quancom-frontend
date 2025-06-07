@@ -314,6 +314,15 @@
     </form>
 
     <script>
+      if (navigator.credentials && navigator.credentials.get) {
+        navigator.credentials.get({ password: true }).then((cred) => {
+          if (cred && cred.id) {
+            console.log(cred);
+            document.querySelector('input[name="email"]').value = cred.id;
+          }
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("cow");
         const emailInput = document.getElementById("email");
